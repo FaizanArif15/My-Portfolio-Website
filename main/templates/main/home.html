@@ -22,57 +22,6 @@
     <meta name="msapplication-TileImage" content="{% static 'images/mstile-150x150.png' %}">
 
     <style>
-
-        /* ... (keep all previous styles the same until the hero section) ... */
-
-        /* Hero Section */
-        #hero {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            min-height: 100vh;
-            padding-top: 100px;
-        }
-        
-        .hero-content {
-            max-width: 600px;
-            order: 1; /* Default order for desktop (left side) */
-        }
-        
-        .profile-pic {
-            width: 350px;
-            height: 350px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid #64ffda;
-            box-shadow: 0 0 30px rgba(100, 255, 218, 0.3);
-            order: 2; /* Default order for desktop (right side) */
-        }
-
-        @media (max-width: 768px) {
-            #hero {
-                flex-direction: column;
-                padding-top: 30px;
-            }
-            
-            .hero-content {
-                order: 2; /* Content comes after image on mobile */
-                text-align: center;
-            }
-            
-            .profile-pic {
-                order: 1; /* Image comes first on mobile */
-                width: 250px;
-                height: 250px;
-                margin-bottom: 2rem;
-            }
-            
-            /* ... (keep other mobile styles the same) ... */
-        }
-
-        /* ... (keep all other styles the same) ... */
-
-
         /* Basic Reset */
         * {
             margin: 0;
@@ -165,28 +114,7 @@
         
         .hero-content {
             max-width: 600px;
-        }
-        
-        .hero-subtitle {
-            color: #64ffda;
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            font-weight: 400;
-        }
-        
-        .hero-title {
-            font-size: 4rem;
-            font-weight: 700;
-            margin: 0.5rem 0;
-            color: #e6f1ff;
-            line-height: 1.1;
-        }
-        
-        .hero-description {
-            color: #8892b0;
-            font-size: 1.1rem;
-            margin: 1.5rem 0 2.5rem;
-            max-width: 540px;
+            order: 1;
         }
         
         .profile-pic {
@@ -196,9 +124,9 @@
             object-fit: cover;
             border: 5px solid #64ffda;
             box-shadow: 0 0 30px rgba(100, 255, 218, 0.3);
+            order: 2;
         }
-        
-        /* Add this to your existing CSS */
+
         .resume-btn-container {
             display: flex;
             gap: 1rem;
@@ -260,7 +188,7 @@
         }
         
         .project-card {
-            flex: 0 0 calc(33.333% - 1.34rem); /* Three cards with gap accounted for */
+            flex: 0 0 calc(33.333% - 1.34rem);
             background: rgba(17, 34, 64, 0.7);
             border-radius: 10px;
             padding: 2rem;
@@ -290,7 +218,7 @@
             border-radius: 5px;
             margin-bottom: 1rem;
         }
-        
+
         .project-btn {
             position: absolute;
             top: 50%;
@@ -352,7 +280,7 @@
         }
         
         .certificate-card {
-            flex: 0 0 calc(33.333% - 1.34rem); /* Three cards with gap accounted for */
+            flex: 0 0 calc(33.333% - 1.34rem);
             background: rgba(17, 34, 64, 0.7);
             border-radius: 10px;
             padding: 2rem;
@@ -431,41 +359,22 @@
             position: relative;
         }
         
+        /* Improve touch/swipe experience */
+        .project-list, .carousel-track {
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            overscroll-behavior-x: contain;
+        }
+
         /* Responsive Design */
         @media (max-width: 1024px) {
             .project-card,
             .certificate-card {
-                flex: 0 0 calc(50% - 1rem); /* Two cards on tablet */
+                flex: 0 0 calc(50% - 1rem);
             }
         }
 
-        @media (max-width: 768px) {
-            #hero {
-                flex-direction: column; /* Changed from column-reverse to column */
-                padding-top: 30px;
-            }
-            .profile-pic {
-                width: 200px;
-                height: 200px;
-                margin-bottom: 2rem;
-            }
-            .hero-content {
-                text-align: center;
-                order: 2; /* Ensure content comes after image */
-            }
-        }
-
-        @media (max-width: 480px) {
-            .resume-btn-container {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-            .cool-resume-btn {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-        
         @media (max-width: 768px) {
             .navbar {
                 padding: 1rem 1.5rem;
@@ -499,7 +408,7 @@
             
             .hero-content {
                 margin-bottom: 2rem;
-                order: 2; /* Ensure content comes after image */
+                order: 2;
             }
             
             .hero-title {
@@ -510,23 +419,41 @@
                 margin-top: 1rem;
                 width: 250px;
                 height: 250px;
-                order: 1; /* Ensure image comes first */
+                order: 1;
             }
             
             .project-card,
             .certificate-card {
-                flex: 0 0 100%; /* One card on mobile */
+                flex: 0 0 100%;
                 min-width: 0;
             }
             
-            .project-btn,
-            .carousel-btn {
-                display: none;
+            /* Show and style arrows on mobile */
+            .project-btn, .carousel-btn {
+                display: flex !important;
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+                background: rgba(100, 255, 218, 0.5);
+                box-shadow: 0 0 10px rgba(0,0,0,0.3);
             }
             
-            .projects-container,
-            .certificate-carousel {
-                padding: 0 20px;
+            .project-btn.prev, .carousel-btn.prev {
+                left: 10px;
+            }
+            
+            .project-btn.next, .carousel-btn.next {
+                right: 10px;
+            }
+            
+            /* Adjust carousel container padding */
+            .projects-container, .certificate-carousel {
+                padding: 0 30px;
+            }
+            
+            /* Make sure track has enough space */
+            .project-list, .carousel-track {
+                padding: 1rem 0;
             }
             
             section {
@@ -536,17 +463,32 @@
             section h2 {
                 font-size: 2rem;
             }
+        }
 
-            /* Add will-change for smoother animations */
-            .project-card, .certificate-card {
-                will-change: transform;
+        @media (max-width: 480px) {
+            .resume-btn-container {
+                flex-direction: column;
+                gap: 0.5rem;
             }
-
-            /* Optimize image loading */
-            .profile-pic, .project-image {
-                loading: lazy;
+            .cool-resume-btn {
+                width: 100%;
+                justify-content: center;
             }
+            
+            /* Make arrows slightly smaller on very small screens */
+            .project-btn, .carousel-btn {
+                width: 35px;
+                height: 35px;
+            }
+        }
 
+        /* Performance optimizations */
+        .project-card, .certificate-card {
+            will-change: transform;
+        }
+
+        .profile-pic, .project-image {
+            loading: lazy;
         }
     </style>
 </head>
@@ -676,185 +618,150 @@
 
     <script>
         // Mobile Menu Toggle
-        function toggleMenu() {
-            const menu = document.getElementById('menu');
-            menu.classList.toggle('active');
-        }
+    function toggleMenu() {
+        const menu = document.getElementById('menu');
+        menu.classList.toggle('active');
+    }
 
-        // Project Carousel with infinite loop navigation
-        function scrollProjects(direction) {
-            const track = document.getElementById('projectTrack');
-            const cards = document.querySelectorAll('.project-card');
-            const cardCount = cards.length;
-            const cardWidth = cards[0].offsetWidth + 32; // width + gap
-            const visibleCards = 3;
-            const scrollAmount = cardWidth * visibleCards;
-            
-            if (direction === 'left') {
-                if (track.scrollLeft <= 10) {
-                    // If at start, scroll to position showing last set
-                    const lastSetPosition = cardWidth * (cardCount - visibleCards);
-                    track.scrollTo({
-                        left: lastSetPosition,
-                        behavior: 'smooth'
-                    });
-                } else {
-                    track.scrollBy({
-                        left: -scrollAmount,
-                        behavior: 'smooth'
-                    });
-                }
-            } else {
-                const maxScroll = track.scrollWidth - track.clientWidth;
-                if (track.scrollLeft >= maxScroll - 10) {
-                    // If at end, scroll to start
-                    track.scrollTo({
-                        left: 0,
-                        behavior: 'smooth'
-                    });
-                } else {
-                    track.scrollBy({
-                        left: scrollAmount,
-                        behavior: 'smooth'
-                    });
-                }
-            }
-        }
-
-        // Certificate Carousel with infinite loop navigation
-        function scrollCarousel(direction) {
-            const track = document.getElementById('certificateTrack');
-            const cards = document.querySelectorAll('.certificate-card');
-            const cardCount = cards.length;
-            const cardWidth = cards[0].offsetWidth + 32; // width + gap
-            const visibleCards = 3;
-            const scrollAmount = cardWidth * visibleCards;
-            
-            if (direction === 'left') {
-                if (track.scrollLeft <= 10) {
-                    // If at start, scroll to position showing last set
-                    const lastSetPosition = cardWidth * (cardCount - visibleCards);
-                    track.scrollTo({
-                        left: lastSetPosition,
-                        behavior: 'smooth'
-                    });
-                } else {
-                    track.scrollBy({
-                        left: -scrollAmount,
-                        behavior: 'smooth'
-                    });
-                }
-            } else {
-                const maxScroll = track.scrollWidth - track.clientWidth;
-                if (track.scrollLeft >= maxScroll - 10) {
-                    // If at end, scroll to start
-                    track.scrollTo({
-                        left: 0,
-                        behavior: 'smooth'
-                    });
-                } else {
-                    track.scrollBy({
-                        left: scrollAmount,
-                        behavior: 'smooth'
-                    });
-                }
-            }
-        }
-
-        document.getElementById("logo-link").addEventListener("click", function(e) {
-            e.preventDefault();  // Prevent default anchor behavior
-            window.scrollTo({ top: 0, behavior: "smooth" });  // Smooth scroll
-        });
-
-        // Smooth scroll for navigation links with offset
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                const navbarHeight = document.querySelector('.navbar').offsetHeight;
-                const extraPadding = 10;
-                
-                // Close mobile menu if open
-                const menu = document.getElementById('menu');
-                if (menu.classList.contains('active')) {
-                    menu.classList.remove('active');
-                }
-                
-                // Calculate target position with offset
-                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight - extraPadding;
-                
-                // Smooth scroll to target
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Initialize carousels to show first set of cards
-        window.addEventListener('load', function() {
-            document.getElementById('projectTrack').scrollTo(0, 0);
-            document.getElementById('certificateTrack').scrollTo(0, 0);
-        });
-
-        // Add touch event listeners for mobile swiping
-        const projectTrack = document.getElementById('projectTrack');
-        let isDown = false;
-        let startX;
-        let scrollLeft;
-
-        projectTrack.addEventListener('mousedown', (e) => {
-            isDown = true;
-            startX = e.pageX - projectTrack.offsetLeft;
-            scrollLeft = projectTrack.scrollLeft;
-        });
-
-        projectTrack.addEventListener('mouseleave', () => {
-            isDown = false;
-        });
-
-        projectTrack.addEventListener('mouseup', () => {
-            isDown = false;
-        });
-
-        projectTrack.addEventListener('mousemove', (e) => {
-            if(!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - projectTrack.offsetLeft;
-            const walk = (x - startX) * 2; // Scroll-fastness
-            projectTrack.scrollLeft = scrollLeft - walk;
-        });
-
-        // Add similar for touch events
-        projectTrack.addEventListener('touchstart', (e) => {
-            isDown = true;
-            startX = e.touches[0].pageX - projectTrack.offsetLeft;
-            scrollLeft = projectTrack.scrollLeft;
-        });
-
-        projectTrack.addEventListener('touchend', () => {
-            isDown = false;
-        });
-
-        projectTrack.addEventListener('touchmove', (e) => {
-            if(!isDown) return;
-            const x = e.touches[0].pageX - projectTrack.offsetLeft;
-            const walk = (x - startX) * 2;
-            projectTrack.scrollLeft = scrollLeft - walk;
-        });
+    // Project Carousel - scroll one project at a time
+    function scrollProjects(direction) {
+        const track = document.getElementById('projectTrack');
+        const cards = document.querySelectorAll('.project-card');
+        const cardWidth = cards[0].offsetWidth + 32; // width + gap
         
-        // Close menu when clicking outside
-        document.addEventListener('click', function(e) {
-            const menu = document.getElementById('menu');
-            const menuToggle = document.querySelector('.menu-toggle');
+        // Calculate how many cards are currently visible
+        const visibleCards = Math.floor(track.clientWidth / cardWidth);
+        const scrollAmount = cardWidth * 1; // Scroll by one card
+        
+        if (direction === 'left') {
+            track.scrollBy({
+                left: -scrollAmount,
+                behavior: 'smooth'
+            });
+        } else {
+            track.scrollBy({
+                left: scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+    }
+
+    // Certificate Carousel - scroll one certificate at a time
+    function scrollCarousel(direction) {
+        const track = document.getElementById('certificateTrack');
+        const cards = document.querySelectorAll('.certificate-card');
+        const cardWidth = cards[0].offsetWidth + 32; // width + gap
+        
+        // Calculate how many cards are currently visible
+        const visibleCards = Math.floor(track.clientWidth / cardWidth);
+        const scrollAmount = cardWidth * 1; // Scroll by one card
+        
+        if (direction === 'left') {
+            track.scrollBy({
+                left: -scrollAmount,
+                behavior: 'smooth'
+            });
+        } else {
+            track.scrollBy({
+                left: scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+    }
+
+    document.getElementById("logo-link").addEventListener("click", function(e) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    // Smooth scroll for navigation links with offset
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
             
-            if (!menu.contains(e.target) && !menuToggle.contains(e.target)) {
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            const navbarHeight = document.querySelector('.navbar').offsetHeight;
+            const extraPadding = 10;
+            
+            // Close mobile menu if open
+            const menu = document.getElementById('menu');
+            if (menu.classList.contains('active')) {
                 menu.classList.remove('active');
             }
+            
+            // Calculate target position with offset
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight - extraPadding;
+            
+            // Smooth scroll to target
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
         });
+    });
 
+    // Initialize carousels to show first set of cards
+    window.addEventListener('load', function() {
+        document.getElementById('projectTrack').scrollTo(0, 0);
+        document.getElementById('certificateTrack').scrollTo(0, 0);
+    });
+
+    // Add touch event listeners for mobile swiping
+    const projectTrack = document.getElementById('projectTrack');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    projectTrack.addEventListener('mousedown', (e) => {
+        isDown = true;
+        startX = e.pageX - projectTrack.offsetLeft;
+        scrollLeft = projectTrack.scrollLeft;
+    });
+
+    projectTrack.addEventListener('mouseleave', () => {
+        isDown = false;
+    });
+
+    projectTrack.addEventListener('mouseup', () => {
+        isDown = false;
+    });
+
+    projectTrack.addEventListener('mousemove', (e) => {
+        if(!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - projectTrack.offsetLeft;
+        const walk = (x - startX) * 2;
+        projectTrack.scrollLeft = scrollLeft - walk;
+    });
+
+    // Add similar for touch events
+    projectTrack.addEventListener('touchstart', (e) => {
+        isDown = true;
+        startX = e.touches[0].pageX - projectTrack.offsetLeft;
+        scrollLeft = projectTrack.scrollLeft;
+    });
+
+    projectTrack.addEventListener('touchend', () => {
+        isDown = false;
+    });
+
+    projectTrack.addEventListener('touchmove', (e) => {
+        if(!isDown) return;
+        const x = e.touches[0].pageX - projectTrack.offsetLeft;
+        const walk = (x - startX) * 2;
+        projectTrack.scrollLeft = scrollLeft - walk;
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+        const menu = document.getElementById('menu');
+        const menuToggle = document.querySelector('.menu-toggle');
+        
+        if (!menu.contains(e.target) && !menuToggle.contains(e.target)) {
+            menu.classList.remove('active');
+        }
+    });
     </script>
 </body>
 </html>
