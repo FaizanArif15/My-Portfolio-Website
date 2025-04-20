@@ -22,6 +22,57 @@
     <meta name="msapplication-TileImage" content="{% static 'images/mstile-150x150.png' %}">
 
     <style>
+
+        /* ... (keep all previous styles the same until the hero section) ... */
+
+        /* Hero Section */
+        #hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 100vh;
+            padding-top: 100px;
+        }
+        
+        .hero-content {
+            max-width: 600px;
+            order: 1; /* Default order for desktop (left side) */
+        }
+        
+        .profile-pic {
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #64ffda;
+            box-shadow: 0 0 30px rgba(100, 255, 218, 0.3);
+            order: 2; /* Default order for desktop (right side) */
+        }
+
+        @media (max-width: 768px) {
+            #hero {
+                flex-direction: column;
+                padding-top: 30px;
+            }
+            
+            .hero-content {
+                order: 2; /* Content comes after image on mobile */
+                text-align: center;
+            }
+            
+            .profile-pic {
+                order: 1; /* Image comes first on mobile */
+                width: 250px;
+                height: 250px;
+                margin-bottom: 2rem;
+            }
+            
+            /* ... (keep other mobile styles the same) ... */
+        }
+
+        /* ... (keep all other styles the same) ... */
+
+
         /* Basic Reset */
         * {
             margin: 0;
@@ -390,7 +441,7 @@
 
         @media (max-width: 768px) {
             #hero {
-                flex-direction: column-reverse; /* Image first on mobile */
+                flex-direction: column; /* Changed from column-reverse to column */
                 padding-top: 30px;
             }
             .profile-pic {
@@ -400,6 +451,7 @@
             }
             .hero-content {
                 text-align: center;
+                order: 2; /* Ensure content comes after image */
             }
         }
 
@@ -447,6 +499,7 @@
             
             .hero-content {
                 margin-bottom: 2rem;
+                order: 2; /* Ensure content comes after image */
             }
             
             .hero-title {
@@ -457,6 +510,7 @@
                 margin-top: 1rem;
                 width: 250px;
                 height: 250px;
+                order: 1; /* Ensure image comes first */
             }
             
             .project-card,
